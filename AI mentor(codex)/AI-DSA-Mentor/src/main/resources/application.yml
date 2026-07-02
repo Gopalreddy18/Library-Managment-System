@@ -1,0 +1,48 @@
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: AI-DSA-Mentor
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/ai_dsa_mentor?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: ${JPA_SHOW_SQL:false}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET:change-this-secret-to-a-strong-256-bit-production-value-minimum}
+      expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+logging:
+  level:
+    org.springframework.security: INFO
