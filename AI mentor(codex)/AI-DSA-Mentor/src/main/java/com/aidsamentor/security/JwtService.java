@@ -4,8 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import java.security.Key;
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
@@ -44,6 +44,10 @@ public class JwtService {
                 .expiration(expiration)
                 .signWith(getSigningKey())
                 .compact();
+    }
+
+    public long getAccessTokenExpirationMs() {
+        return jwtProperties.expirationMs();
     }
 
     private boolean isTokenExpired(String token) {

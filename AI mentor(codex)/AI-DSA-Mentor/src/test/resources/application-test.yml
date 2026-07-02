@@ -14,3 +14,4 @@ application:
     jwt:
       secret-key: test-secret-key-with-at-least-thirty-two-characters
       expiration-ms: 3600000
+      refresh-expiration-ms: 604800000

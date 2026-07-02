@@ -42,6 +42,7 @@ application:
     jwt:
       secret-key: ${JWT_SECRET:change-this-secret-to-a-strong-256-bit-production-value-minimum}
       expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+      refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000}
 
 logging:
   level:
