@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: mentor
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/dsa_mentor?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+app:
+  jwt:
+    # 256-bit base64-encoded secret key: "dGhlLXNlY3JldC1rZXktZm9yLWFpLWRzYS1tZW50b3ItcGxhdGZvcm0tc2VjdXJlLWtleQ=="
+    secret: ${JWT_SECRET:dGhlLXNlY3JldC1rZXktZm9yLWFpLWRzYS1tZW50b3ItcGxhdGZvcm0tc2VjdXJlLWtleQ==}
+    accessTokenExpirationMs: ${JWT_ACCESS_EXPIRATION:3600000} # 1 hour
+    refreshTokenExpirationMs: ${JWT_REFRESH_EXPIRATION:86400000} # 24 hours
+  ai:
+    gemini:
+      apiKey: ${GEMINI_API_KEY:}
+      apiUrl: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent
+
+server:
+  port: 8080
+  error:
+    include-message: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
